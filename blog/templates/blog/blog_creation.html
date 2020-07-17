@@ -1,0 +1,65 @@
+{% extends "blog/base.html" %}
+
+{% block title %}
+	- Create
+{% endblock %}
+
+{% block style_load %}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css" integrity="sha512-kZqGbhf9JTB4bVJ0G8HCkqmaPcRgo88F0dneK30yku5Y/dep7CZfCnNml2Je/sY4lBoqoksXz4PtVXS4GHSUzQ==" crossorigin="anonymous" />
+{% endblock %}
+
+{% block content %}
+	<form action="" method="post">
+		{% csrf_token %}
+		<div class="form-group">
+			<label for="title">Title</label>
+			<input type="text" name="title" class="form-control mb-2" id="title" placeholder="Blog title" {% if form.title.value %} value="{{form.title.value}}" {% endif %} required>
+
+			<label for="desc">Description</label>
+			<input type="text" name="desc" class="form-control mb-2" id="desc" placeholder="Short description" {% if form.desc.value %} value="{{form.desc.value}}" {% endif %} required>
+			
+			<label for="blog_text">Blog Text</label>
+			<textarea name="article_text" class="form-control mb-2" id="blog_text" rows="4" placeholder="Write your blog here" required>{% if form.article_text.value %} {{form.article_text.value}} {% endif %}</textarea>
+		</div>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mdpreview" onclick="html_preview()">
+			Preview
+		</button>
+		<input type="submit" value="Save" class="btn btn-success ml-2">
+		<a class="btn btn-secondary ml-2" href="{% url 'blog_index' %}">Cancel</a>
+	</form>
+	
+	<div class="modal fade" id="mdpreview" data-backdrop="static" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Preview</h5>
+					<button type="button" class="close" data-dismiss="modal" onclick="del_html_preview()">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div id="preview-text"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="del_html_preview()">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block script_load%}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/11.0.0/markdown-it.min.js" integrity="sha512-0tDdhRf9dcDufaaOQQdvywK56y+cwomy6rjOrqk05N61cQOTdO2Cqqgq8EfXVBDXJe0TH9smqvDicQzMiBG14g==" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha512-lnOllyZZlRk/gQIyjS3+h+LUy54uyM4aGq2zbGc82KTvBlp/fodSpdh/pywPztpU9zUqHcJr+jP+a1zLa9oCJw==" crossorigin="anonymous"></script>
+	
+	<script>
+		function html_preview(){
+			document.getElementById("preview-text").innerHTML = window.markdownit().render(document.getElementById("blog_text").value);
+			document.querySelectorAll('pre code').forEach((block) => {
+				hljs.highlightBlock(block);
+			});
+		}
+		
+		function del_html_preview(){
+			document.getElementById("preview-text").innerHTML = "";
+		}
+    </script>
+{% endblock %}

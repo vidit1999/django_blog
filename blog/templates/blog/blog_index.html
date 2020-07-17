@@ -1,0 +1,57 @@
+{% extends "blog/base.html" %} 
+
+{% block title %}
+	- Blogs
+{% endblock %}
+
+{% block nav_buttons %}
+	<a class="btn btn-light {% if not page_obj.has_previous %}disabled{% endif %}" href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% else %}#{% endif %}">
+		<svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-arrow-left-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+			<path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.646 2.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L6.207 7.5H11a.5.5 0 0 1 0 1H6.207l2.147 2.146z"/>
+		</svg>
+	</a>
+
+	<a class="btn btn-light {% if not page_obj.has_next %}disabled{% endif %}" href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% else %}#{% endif %}">
+		<svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-arrow-right-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+			<path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-8.354 2.646a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L9.793 7.5H5a.5.5 0 0 0 0 1h4.793l-2.147 2.146z"/>
+		</svg>
+	</a>
+{% endblock %}
+
+{% block content %}
+	{% for article in page_obj %}
+		<div class="row">
+			<div class="col">
+				<h4 class="mb-1">{{article.title}}</h4>
+				<p class="mb-1"><small>Last modied : {{article.date_modified}}</small></p>
+				<p class="mb-3">{{article.desc}}</p>
+			</div>
+			 <!-- d-flex justify-content-center align-items-center"> -->
+			<div class="btn-group ml-auto mr-3 d-flex justify-content-center align-items-center">
+				<a href="{% url 'blog_view' article.id %}" class="btn btn-outline-info">View</a>
+				{% if user.is_authenticated %}
+					<a href="{% url 'blog_change' article.id %}" class="btn btn-outline-secondary">Change</a>
+					<a href="{% url 'blog_delete' article.id %}" class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+				{% endif %}
+			</div>
+		</div>
+		<hr>
+	{% empty %}
+		<div class="row justify-content-center">
+	        <div class="mt-4">
+	           	Sorry, there is no article available.
+	           	{% if user.is_authenticated %}
+	    			<a class="btn btn-info btn-block" href="{% url 'blog_create' %}">Create an article</a>
+	    		{% endif %}
+	        </div>
+	    </div>
+	{% endfor %}
+{% endblock %}
+
+{% block script_load%}
+	<!-- <script>
+		function delete_confirm(){
+			return confirm("Are you sure you want to delete it?");
+		}
+	</script> -->
+{% endblock %}

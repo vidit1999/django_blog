@@ -1,0 +1,39 @@
+{% extends "blog/base.html" %}
+
+
+{% block content %}
+	<div class="row justify-content-center">
+		<div class="cointainer">
+			<h1>Learn To Code</h1>
+		</div>
+	</div>
+	<hr>
+	
+	{% if articles %}
+		<div class="row">
+			<div class="col-3 mt-5 ml-5 text-center">
+				<h2>Some articles.</h2>
+				<p>To check all articles visit our <a href="{% url 'blog_index' %}">Blogs</a>.</p>
+			</div>
+			<div class=col-2></div>
+			<div class="col-6 text-center">
+				<ul class="list-group">
+  					{% for article in articles %}
+						<li class="list-group-item">
+							<a href="{% url 'blog_view' article.id %}" class="text-info">{{ article.title }}</a>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	{% else %}
+		<div class="row justify-content-center">
+	        <div class="mt-4">
+	           	Sorry, there is no article available.
+	           	{% if user.is_authenticated %}
+	    			<a class="btn btn-info btn-block" href="{% url 'blog_create' %}">Create an article</a>
+	    		{% endif %}
+	        </div>
+	    </div>	
+	{% endif %}
+{% endblock %}
