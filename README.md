@@ -45,11 +45,17 @@ $:django_blog\> touch secret_tokens.json
 
 So,
 Admin site : ***hosturl/your-admin-url***
+
 Login site : ***hosturl/your-login-url***
+
 Signin site : ***hosturl/your-signin-url***
+
 Logout site : ***hosturl/your-logout-url***
+
 Blog Create site : ***hosturl/blog/your-blog-creation-url***
+
 Blog Change site : ***hosturl/blog/your-blog-change-url/blog_id***
+
 Blog Delete site : ***hosturl/your-blog-delete-url/blog_id***
 
 Example,
@@ -70,12 +76,19 @@ Contens of file : *secret_tokens.json*
 ```
 So, respective sites will be at,
 Admin site : ***hosturl/2xsmRyVBiMlHAh***
+
 Login site : ***hosturl/S6rXbRPmouBM0t7***
+
 Signin site : ***hosturl/5Iox0a2eGLZquj63A***
+
 Logout site : ***hosturl/Q2VKFmT8OfL1bGhoz***
+
 Blog Create site : ***hosturl/blog/WmSrJRK5AFN***
+
 Blog Change site : ***hosturl/blog/86YDMKoPlucEznJ27/blog_id***
+
 Blog Delete site : ***hosturl/e2lkBmfcjY8uNi1ab/blog_id***
+
 
 * Start the server,
 ```shell
@@ -83,14 +96,17 @@ $:django_blog\> python manage.py runserver
 ```
 
 Only one user can sign in using the signin site. So you can either create it by visiting *Signin Site* or by using the django command,
+
 ```shell
 $:django_blog\> python manage.py createsuperuser username
 ```
+
 You are free to create other users using `createsuperuser` command as shown above.
 
 Visit your Hosturl (say : *http://127.0.0.1:8000/*) and you will the home page.
 Signin or Login and create some articles.
 
 You will see them appearing in Blog Site (say : *http://127.0.0.1:8000/blog/*).
+
 If user is signed in then he/she will be able to create/change/delete articles.
 Else he/she will only be able to view articles.
