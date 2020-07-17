@@ -8,7 +8,7 @@ To use it,
 ```shell
 $:\> git clone https://github.com/vidit1999/django_blog.git
 ```
-* You will have a folder named *codeblog*. Go into that folder.
+* You will have a folder named *django_blog*. Go into that folder.
 ```shell
 $:\> cd django_blog
 ```
