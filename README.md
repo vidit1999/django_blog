@@ -6,7 +6,7 @@
 To use it,
 * First clone the repositry or download the zip file.
 ```shell
-$:\> git clone 
+$:\> git clone https://github.com/vidit1999/django_blog.git
 ```
 * You will have a folder named *codeblog*. Go into that folder.
 ```shell
