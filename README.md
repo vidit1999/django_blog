@@ -42,12 +42,19 @@ $:django_blog\> touch secret_tokens.json
 }
 ```
 So,
+
 Admin site : ***hosturl/your-admin-url***
+
 Login site : ***hosturl/your-login-url***
+
 Signin site : ***hosturl/your-signin-url***
+
 Logout site : ***hosturl/your-logout-url***
+
 Blog Create site : ***hosturl/blog/your-blog-creation-url***
+
 Blog Change site : ***hosturl/blog/your-blog-change-url/blog_id***
+
 Blog Delete site : ***hosturl/your-blog-delete-url/blog_id***
 
 Example,

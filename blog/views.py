@@ -23,7 +23,7 @@ def home(request):
 # blog list page
 def blog_index(request):
 	articles = Articles.objects.all().order_by('-date_modified')
-	page_obj = Paginator(articles, 2).get_page(request.GET.get('page'))
+	page_obj = Paginator(articles, 8).get_page(request.GET.get('page'))
 	context = {'articles' : articles, 'page_obj' : page_obj}
 	return render(request, 'blog/blog_index.html', context)
 
